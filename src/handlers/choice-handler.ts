@@ -12,6 +12,7 @@ export class ChoiceHandler {
     @Route('/pick', RequestMethod.POST)
     public pick(req : Request, res: Response): void {
         console.log('Pick');
+        this.pickService.pick([], 0);
         res.status(200).send();
     }
 }

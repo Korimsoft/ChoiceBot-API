@@ -6,15 +6,15 @@ export const Route = (path: string, method: RequestMethod): MethodDecorator => {
     return (target: Object, propertyKey: string | symbol): void => {
     
       if (! Reflect.hasMetadata('routes', target.constructor)) {
-        Reflect.metadata('routes', target.constructor);
+        Reflect.defineMetadata('routes', [], target.constructor);
       }
   
-      const routes = Reflect.getMetadata('routes', target.constructor) as Array<RouteDefinition>;
+      const routes = Reflect.getMetadata('routes', target.constructor) as RouteDefinition[];
   
       routes.push({
         requestMethod: method,
         path,
-        methodName: propertyKey
+        handler: (target as any)[propertyKey]
       });
       Reflect.defineMetadata('routes', routes, target.constructor);
     };

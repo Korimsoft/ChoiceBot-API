@@ -1,7 +1,7 @@
 export interface RouteDefinition {
   path: string;
   requestMethod: RequestMethod
-  methodName: string | symbol;
+  handler: any;
 }
 
 
